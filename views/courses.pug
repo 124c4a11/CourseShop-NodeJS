@@ -1,4 +1,20 @@
 extends layouts/main
 
 block content
-  h1= message
+  h1= title
+
+  if courses.length
+    .row
+      each course in courses
+        .col.s12.m6.offset-m2
+          .card
+            .card-image
+              img(src= course.img)
+            .card-content
+              h2.card-title= course.title
+              p
+                b= `$ ${course.price}`
+            .card-action
+              a(href=`/course/${course.id}`) More
+  else
+    p No courses!
