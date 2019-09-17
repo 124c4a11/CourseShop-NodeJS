@@ -1,0 +1,9 @@
+extends layouts/main
+
+block content
+  .course
+    h1= course.title
+
+    img.course__img(src= course.img, alt= course.title)
+
+    p.course__price= `$ ${course.price}`
