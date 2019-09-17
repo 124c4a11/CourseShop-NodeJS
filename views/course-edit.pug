@@ -1,0 +1,24 @@
+extends layouts/main
+
+block content
+  h1= `Edit ${course.title}`
+
+  form(action='/courses/edit' method='POST')
+    .input-field
+      input#title.validate(type='text' name='title' value= course.title required)
+      label(for='title') Course title
+      span.helper-text(data-error='Enter title')
+
+    .input-field
+      input#price.validate(type='number' name='price' min='1' value= course.price required)
+      label(for='price') Course price
+      span.helper-text(data-error='Enter price')
+
+    .input-field
+      input#img.validate(type='text' name='img' value=course.img required)
+      label(for='img') Image url
+      span.helper-text(data-error='Enter image url')
+
+    input(type='hidden' name='id' value= course.id)
+
+    button.btn.btn-primary(type='submit') Update course

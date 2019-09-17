@@ -30,6 +30,24 @@ class Course {
     return courses.find((course) => course.id === id);
   };
 
+  static async update(course) {
+    const courses = await Course.getAll();
+    const ndx = courses.findIndex((c) => c.id === course.id);
+
+    courses[ndx] = course;
+
+    new Promise((resolve, reject) => {
+      fs.writeFile(
+        path.join(__dirname, '..', 'data', 'courses.json'),
+        JSON.stringify(courses),
+        (err, content) => {
+          if (err) reject(err);
+          else resolve(content);
+        }
+      );
+    });
+  };
+
   getCourse() {
     return {
       title: this.title,
