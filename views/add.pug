@@ -1,4 +1,22 @@
 extends layouts/main
 
 block content
-  h1= message
+  h1= title
+
+  form(action='/add' method='POST')
+    .input-field
+      input#title.validate(type='text' name='title' required)
+      label(for='title') Course title
+      span.helper-text(data-error='Enter title')
+
+    .input-field
+      input#price.validate(type='number' name='price' min='1' required)
+      label(for='price') Course price
+      span.helper-text(data-error='Enter price')
+
+    .input-field
+      input#img.validate(type='text' name='img' required)
+      label(for='img') Image url
+      span.helper-text(data-error='Enter image url')
+
+    button.btn.btn-primary(type='submit') Add course
