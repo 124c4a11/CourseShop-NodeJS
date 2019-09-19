@@ -2,23 +2,30 @@ nav.navbar.blue-grey
   .nav-wrapper
     a.brand-logo(href="/") Course Shop
     ul#nav-mobile.right.hide-on-med-and-down
-      if (isHome)
+      if isHome
         li.active
           a(href="/") Home
       else
         li
           a(href="/") Home
 
-      if (isCourses)
+      if isCourses
         li.active
           a(href="/courses") Courses
       else
         li
           a(href="/courses") Courses
 
-      if (isAdd)
+      if isAdd
         li.active
           a(href="/add") Add Course
       else
         li
           a(href="/add") Add Course
+
+      if isCart
+        li.active
+          a(href="/cart") Cart
+      else
+        li
+          a(href="/cart") Cart

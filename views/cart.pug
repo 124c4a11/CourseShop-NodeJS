@@ -1,0 +1,24 @@
+extends layouts/main
+
+block content
+  h1= title
+
+  #cart
+    if courses.length
+      table
+        thead
+          tr
+            th Course name
+            th Count
+            th Actions
+        tbody
+          each course in courses
+            tr
+              td= course.title
+              td= course.count
+              td
+                button.btn.btn-small.cart-remove(data-id= course.id) Delete
+
+      p <b>Total price: </b> <span class='price'>$ #{price}</span>
+    else
+    p Cart is empty!
