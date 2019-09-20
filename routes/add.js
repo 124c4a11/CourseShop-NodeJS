@@ -19,11 +19,14 @@ router.post('/', async (req, res) => {
     img
   } = req.body;
 
-  const course = new Course(title, price, img);
+  const course = new Course({ title, price, img });
 
-  await course.save();
-
-  res.redirect('/courses');
+  try {
+    await course.save();
+    res.redirect('/courses');
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 
