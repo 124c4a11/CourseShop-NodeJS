@@ -64,4 +64,15 @@ router.post('/edit', async (req, res) => {
 });
 
 
+router.post('/remove', async (req, res) => {
+  try {
+    await Course.deleteOne({ _id: req.body.id });
+
+    res.redirect('/courses');
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+
 module.exports = router;
