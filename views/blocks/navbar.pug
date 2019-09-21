@@ -29,3 +29,10 @@ nav.navbar.blue-grey
       else
         li
           a(href="/cart") Cart
+
+      if isOrders
+        li.active
+          a(href="/orders") Orders
+      else
+        li
+          a(href="/orders") Orders

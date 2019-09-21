@@ -1,0 +1,22 @@
+extends layouts/main
+
+block content
+  h1= title
+
+  if orders.length
+    each order in orders
+
+      .row
+        .col.s6.offset-s3
+         .card
+          .card-content
+            .card-title Order: <small>#{order._id}</small>
+            p.date= order.date
+            p <em>#{order.user.name}</em> (#{order.user.userId.email})
+            ol
+              each course in order.courses
+                li #{course.course.title} <b>(x #{course.count})</b>
+            hr
+            p Total price: <span class='price'>$ #{order.price}</span>
+  else
+    p No orders!

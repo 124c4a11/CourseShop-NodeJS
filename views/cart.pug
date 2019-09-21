@@ -20,5 +20,8 @@ block content
                 button.btn.btn-small.cart-remove(data-id= course.id) Delete
 
       p <b>Total price: </b> <span class='price'>$ #{price}</span>
+
+      form(action='/orders', method='POST')
+        button.btn.btn-primary(type='submit') Order
     else
-    p Cart is empty!
+      p Cart is empty!
