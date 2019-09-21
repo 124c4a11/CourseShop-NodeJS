@@ -32,4 +32,25 @@ const userSchema = new Schema ({
 });
 
 
+userSchema.methods.addToCart = function(course) {
+  const items = [ ...this.cart.items ];
+  const ndx = items.findIndex((c) => {
+    return c.courseId.toString() === course._id.toString();
+  });
+
+  if (ndx >= 0) {
+    items[ndx].count++
+  } else {
+    items.push({
+      courseId: course._id,
+      count: 1
+    });
+  }
+
+  this.cart = { items };
+
+  return this.save();
+};
+
+
 module.exports = model('User', userSchema);
