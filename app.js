@@ -9,6 +9,9 @@ const coursesRoutes = require('./routes/courses');
 const cartRoutes = require('./routes/cart');
 
 
+const User = require('./models/User');
+
+
 require('dotenv').config();
 
 
@@ -18,6 +21,19 @@ app.set('view engine', 'pug');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+
+
+app.use(async (req, res, next) => {
+  try {
+    const user = await User.findById('5d861b7853a7a528e48a2f3c');
+
+    req.user = user;
+
+    next();
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 
 app.use('/', homeRoutes);
@@ -33,6 +49,7 @@ async function startDb() {
       useUnifiedTopology: true,
       useFindAndModify: false
     });
+
   } catch (err) {
     console.error(err);
   }
