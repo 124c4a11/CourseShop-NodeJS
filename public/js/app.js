@@ -9,7 +9,6 @@ if ($cart) {
       fetch(`cart/remove/${id}`, { method: 'delete' })
         .then((res) => res.json())
         .then(({ courses, price }) => {
-
           if (courses.length) {
             const itemsTemplate = courses.map((item) => {
               return `
