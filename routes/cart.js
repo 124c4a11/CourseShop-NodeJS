@@ -4,15 +4,34 @@ const router = Router();
 const Course = require('../models/Course');
 
 
-router.get('/', async (req, res) => {
-  // const { courses, price } = await Cart.fetch();
+function mapCartItems(cart) {
+  return cart.items.map((item) => ({
+    ...item.courseId._doc,
+    count: item.count
+  }));
+}
 
-  // res.render('cart', {
-  //   title: 'Cart',
-  //   courses,
-  //   price,
-  //   isCart: true
-  // });
+
+function coumputePrice(courses) {
+  return courses.reduce((total, { price, count }) => {
+    return total += price * count;
+  }, 0);
+}
+
+
+router.get('/', async (req, res) => {
+  const user = await req.user
+    .populate('cart.items.courseId')
+    .execPopulate('');
+
+  const courses = mapCartItems(user.cart);
+
+  res.render('cart', {
+    title: 'Cart',
+    isCart: true,
+    courses,
+    price: coumputePrice(courses)
+  });
 });
 
 
