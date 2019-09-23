@@ -36,3 +36,10 @@ nav.navbar.blue-grey
       else
         li
           a(href="/orders") Orders
+
+      if isLogin
+        li.active
+          a(href="/auth") Log in
+      else
+        li
+          a(href="/auth") Log in

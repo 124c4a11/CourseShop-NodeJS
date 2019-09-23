@@ -1,0 +1,49 @@
+extends layouts/main
+
+block content
+  h1= message
+
+  .row
+    .col.s12
+      ul.tabs
+        li.tab.col.s6
+          a.active(href='#login') Log in
+        li.tab.col.s6
+          a(href='#register') Register
+
+    #login.col.s6.offset-s3
+      h2 Log in
+
+      form(action='/add' method='POST')
+        .input-field
+          input#email.validate(type='email' name='email' required)
+          label(for='email') Email
+          span.helper-text(data-error='Enter email')
+
+        .input-field
+          input#password.validate(type='password' name='password' required)
+          label(for='password') Password
+          span.helper-text(data-error='Enter password')
+
+        button.btn.btn-primary(type='submit') Log in
+
+    #register.col.s6.offset-s3
+      h2 Register
+
+      form(action='/add' method='POST')
+        .input-field
+          input#remail.validate(type='email' name='email' required)
+          label(for='remail') Email
+          span.helper-text(data-error='Enter email')
+
+        .input-field
+          input#rpassword.validate(type='password' name='password' required)
+          label(for='rpassword') Password
+          span.helper-text(data-error='Enter password')
+
+        .input-field
+          input#confirm.validate(type='password' name='confirm' required)
+          label(for='confirm') Confirm password
+          span.helper-text(data-error='Enter password')
+
+        button.btn.btn-primary(type='submit') Registration
