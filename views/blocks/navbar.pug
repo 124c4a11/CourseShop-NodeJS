@@ -16,30 +16,34 @@ nav.navbar.blue-grey
         li
           a(href="/courses") Courses
 
-      if isAdd
-        li.active
-          a(href="/add") Add Course
-      else
-        li
-          a(href="/add") Add Course
+      if isAuth
+        if isAdd
+          li.active
+            a(href="/add") Add Course
+        else
+          li
+            a(href="/add") Add Course
 
-      if isCart
-        li.active
-          a(href="/cart") Cart
-      else
-        li
-          a(href="/cart") Cart
+        if isCart
+          li.active
+            a(href="/cart") Cart
+        else
+          li
+            a(href="/cart") Cart
 
-      if isOrders
-        li.active
-          a(href="/orders") Orders
-      else
-        li
-          a(href="/orders") Orders
+        if isOrders
+          li.active
+            a(href="/orders") Orders
+        else
+          li
+            a(href="/orders") Orders
 
-      if isLogin
-        li.active
-          a(href="/auth") Log in
-      else
         li
-          a(href="/auth") Log in
+          a(href="/auth/logout") Logout
+      else
+        if isLogin
+          li.active
+            a(href="/auth") Log in
+        else
+          li
+            a(href="/auth") Log in

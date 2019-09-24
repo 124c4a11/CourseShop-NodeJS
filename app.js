@@ -1,6 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const session = require('express-session');
+
+
+const varsMiddleware = require('./middleware/variables');
 
 
 const homeRoutes = require('./routes/home');
@@ -23,6 +27,12 @@ app.set('view engine', 'pug');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(varsMiddleware);
 
 
 app.use(async (req, res, next) => {

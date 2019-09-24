@@ -10,4 +10,17 @@ router.get('/', (req, res) => {
 });
 
 
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/auth');
+  });
+});
+
+
+router.post('/login', async (req, res) => {
+  req.session.isAuth = true;
+  res.redirect('/');
+});
+
+
 module.exports = router;
