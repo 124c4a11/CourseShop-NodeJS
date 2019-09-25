@@ -15,9 +15,6 @@ const ordersRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');
 
 
-const User = require('./models/User');
-
-
 require('dotenv').config();
 
 
@@ -33,19 +30,6 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(varsMiddleware);
-
-
-app.use(async (req, res, next) => {
-  try {
-    const user = await User.findById('5d861b7853a7a528e48a2f3c');
-
-    req.user = user;
-
-    next();
-  } catch (err) {
-    console.error(err);
-  }
-});
 
 
 app.use('/', homeRoutes);
