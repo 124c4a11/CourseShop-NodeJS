@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+
+
 const session = require('express-session');
+const MongoStore = require('connect-mongodb-session')(session);
 
 
 const varsMiddleware = require('./middleware/variables');
@@ -22,12 +25,19 @@ const app = express();
 app.set('view engine', 'pug');
 
 
+const store = new MongoStore({
+  collection: 'sessions',
+  uri: process.env.DB
+});
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store
 }));
 app.use(varsMiddleware);
 
