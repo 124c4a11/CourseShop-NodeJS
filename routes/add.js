@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const router = Router();
 
+const auth = require('../middleware/auth');
+
 const Course = require('../models/Course');
 
 
-router.get('/', (req, res) => {
+router.get('/', auth, (req, res) => {
   res.render('add', {
     title: 'Add course',
     isAdd: true
@@ -12,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const {
     title,
     price,
