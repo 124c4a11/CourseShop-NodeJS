@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongodb-session')(session);
 
 
 const varsMiddleware = require('./middleware/variables');
+const userMiddleware = require('./middleware/user');
 
 
 const homeRoutes = require('./routes/home');
@@ -40,6 +41,7 @@ app.use(session({
   store
 }));
 app.use(varsMiddleware);
+app.use(userMiddleware);
 
 
 app.use('/', homeRoutes);
