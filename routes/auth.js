@@ -22,15 +22,26 @@ router.get('/logout', (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const user = await User.findById('5d861b7853a7a528e48a2f3c');
+    const { email, password } = req.body;
+    const candidate = await User.findOne({ email });
 
-    req.session.user = user;
-    req.session.isAuth = true;
-    req.session.save((err) => {
-      if (err) throw err;
+    if (candidate) {
+      const areSame = password === candidate.password;
 
-      res.redirect('/');
-    });
+      if (areSame) {
+        req.session.user = candidate;
+        req.session.isAuth = true;
+        req.session.save((err) => {
+          if (err) throw err;
+
+          res.redirect('/');
+        });
+      } else {
+        res.redirect('/auth#login');
+      }
+    } else {
+      res.redirect('/auth#login');
+    }
   } catch (err) {
     console.error(err);
   }
