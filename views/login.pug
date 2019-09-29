@@ -37,6 +37,11 @@ block content
           span.helper-text(data-error='Enter email')
 
         .input-field
+          input#rname.validate(type='text' name='name' required)
+          label(for='rname') Your name
+          span.helper-text(data-error='Enter your name')
+
+        .input-field
           input#rpassword.validate(type='password' name='password' required)
           label(for='rpassword') Password
           span.helper-text(data-error='Enter password')
