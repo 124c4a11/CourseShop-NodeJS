@@ -17,11 +17,12 @@ block content
               td= course.title
               td= course.count
               td
-                button.btn.btn-small.cart-remove(data-id= course.id) Delete
+                button.btn.btn-small.cart-remove(data-id= course.id data-csrf= csrf) Delete
 
       p <b>Total price: </b> <span class='price'>$ #{price}</span>
 
       form(action='/orders', method='POST')
+        input(type="hidden", name="_csrf" value= csrf)
         button.btn.btn-primary(type='submit') Order
     else
       p Cart is empty!

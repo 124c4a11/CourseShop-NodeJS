@@ -25,6 +25,8 @@ block content
           label(for='password') Password
           span.helper-text(data-error='Enter password')
 
+        input(type="hidden", name="_csrf" value= csrf)
+
         button.btn.btn-primary(type='submit') Log in
 
     #register.col.s6.offset-s3
@@ -50,5 +52,7 @@ block content
           input#confirm.validate(type='password' name='confirm' required)
           label(for='confirm') Confirm password
           span.helper-text(data-error='Enter password')
+
+        input(type="hidden", name="_csrf" value= csrf)
 
         button.btn.btn-primary(type='submit') Registration
