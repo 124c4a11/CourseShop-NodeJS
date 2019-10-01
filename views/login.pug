@@ -14,6 +14,9 @@ block content
     #login.col.s6.offset-s3
       h2 Log in
 
+      if loginError && loginError.length
+        p.alert= loginError
+
       form(action='/auth/login' method='POST')
         .input-field
           input#email.validate(type='email' name='email' required)
@@ -31,6 +34,9 @@ block content
 
     #register.col.s6.offset-s3
       h2 Register
+
+      if registerError && registerError.length
+        p.alert= registerError
 
       form(action='/auth/register' method='POST')
         .input-field

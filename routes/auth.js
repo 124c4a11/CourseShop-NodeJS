@@ -9,7 +9,9 @@ const User = require('../models/User');
 router.get('/', (req, res) => {
   res.render('login', {
     title: 'Authorization',
-    isLogin: true
+    isLogin: true,
+    loginError: req.flash('loginError'),
+    registerError: req.flash('registerError')
   });
 });
 
@@ -38,9 +40,11 @@ router.post('/login', async (req, res) => {
           res.redirect('/');
         });
       } else {
+        req.flash('loginError', 'This user does not exist.');
         res.redirect('/auth#login');
       }
     } else {
+      req.flash('loginError', 'This user does not exist.');
       res.redirect('/auth#login');
     }
   } catch (err) {
@@ -54,7 +58,11 @@ router.post('/register', async (req, res) => {
     const { email, name, password, repeat } = req.body;
     const candidate = await User.findOne({ email });
 
-    if (candidate) return res.redirect('/auth#register');
+    if (candidate) {
+      req.flash('registerError', 'User with such email already exists');
+
+      return res.redirect('/auth#register');
+    }
 
     const hashPasword = await bcrypt.hash(password, 10);
 

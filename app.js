@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const csurf = require('csurf');
+const flash = require('connect-flash');
 
 
 const session = require('express-session');
@@ -42,6 +43,7 @@ app.use(session({
   store
 }));
 app.use(csurf());
+app.use(flash());
 app.use(varsMiddleware);
 app.use(userMiddleware);
 
@@ -67,5 +69,6 @@ async function startDb() {
   }
 }
 startDb();
+
 
 module.exports = app;
