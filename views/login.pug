@@ -28,7 +28,10 @@ block content
           label(for='password') Password
           span.helper-text(data-error='Enter password')
 
-        input(type="hidden", name="_csrf" value= csrf)
+        input(type='hidden', name='_csrf' value= csrf)
+
+        p
+          a(href='/auth/reset') Restore password
 
         button.btn.btn-primary(type='submit') Log in
 
