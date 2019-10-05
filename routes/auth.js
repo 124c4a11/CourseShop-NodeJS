@@ -69,8 +69,14 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-    const { email, name, password, repeat } = req.body;
+    const { email, name, password, confirm } = req.body;
     const candidate = await User.findOne({ email });
+
+    if (password !== confirm) {
+      req.flash('registerError', 'Passwords do not match!');
+
+      return res.redirect('/auth#register');
+    }
 
     if (candidate) {
       req.flash('registerError', 'User with such email already exists');
