@@ -3,7 +3,10 @@ const { Router } = require('express');
 const nodemailer = require('nodemailer');
 const sendgrid = require('nodemailer-sendgrid-transport');
 const crypto = require('crypto');
+const { validationResult } = require('express-validator');
 const router = Router();
+
+const { registerValidators } = require('../utils/validators');
 
 const User = require('../models/User');
 
@@ -67,21 +70,15 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.post('/register', async (req, res) => {
+router.post('/register', registerValidators, async (req, res) => {
   try {
-    const { email, name, password, confirm } = req.body;
-    const candidate = await User.findOne({ email });
+    const { email, name, password } = req.body;
+    const errors = validationResult(req);
 
-    if (password !== confirm) {
-      req.flash('registerError', 'Passwords do not match!');
+    if (!errors.isEmpty()) {
+      req.flash('registerError', errors.array()[0].msg);
 
-      return res.redirect('/auth#register');
-    }
-
-    if (candidate) {
-      req.flash('registerError', 'User with such email already exists');
-
-      return res.redirect('/auth#register');
+      return res.status(422).redirect('/auth#register');
     }
 
     const hashPasword = await bcrypt.hash(password, 10);
