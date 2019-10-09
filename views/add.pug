@@ -3,19 +3,22 @@ extends layouts/main
 block content
   h1= title
 
-  form(action='/add' method='POST')
+  if error && error.length
+    p.alert= error
+
+  form(action='/add' method='POST' novalidate)
     .input-field
-      input#title.validate(type='text' name='title' required)
+      input#title.validate(type='text' name='title' value= data.title required)
       label(for='title') Course title
       span.helper-text(data-error='Enter title')
 
     .input-field
-      input#price.validate(type='number' name='price' min='1' required)
+      input#price.validate(type='number' name='price' min='1' value= data.price required)
       label(for='price') Course price
       span.helper-text(data-error='Enter price')
 
     .input-field
-      input#img.validate(type='text' name='img' required)
+      input#img.validate(type='text' name='img' value=data.img required)
       label(for='img') Image url
       span.helper-text(data-error='Enter image url')
 

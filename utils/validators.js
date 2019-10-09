@@ -28,3 +28,12 @@ exports.registerValidators = [
     return true;
   })
 ];
+
+
+exports.courseValidators = [
+  body('title').isLength({ min: 3 }).withMessage('Minimum title length must be 3 characters'),
+
+  body('price').isNumeric().withMessage('The price field should contain only numbers'),
+
+  body('img', 'Enter the correct image url').isURL()
+];

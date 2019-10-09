@@ -3,7 +3,7 @@ extends layouts/main
 block content
   h1= `Edit ${course.title}`
 
-  form(action='/courses/edit' method='POST')
+  form(action='/courses/edit' method='POST' novalidate)
     .input-field
       input#title.validate(type='text' name='title' value= course.title required)
       label(for='title') Course title
