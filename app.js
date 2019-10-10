@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongodb-session')(session);
 
 const varsMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
+const pageNotFound = require('./middleware/error');
 
 
 const homeRoutes = require('./routes/home');
@@ -54,6 +55,7 @@ app.use('/courses', coursesRoutes);
 app.use('/cart', cartRoutes);
 app.use('/orders', ordersRoutes);
 app.use('/auth', authRoutes);
+app.use(pageNotFound);
 
 
 async function startDb() {
