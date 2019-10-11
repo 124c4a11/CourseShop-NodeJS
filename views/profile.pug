@@ -1,0 +1,29 @@
+extends layouts/main
+
+block content
+  h1= title
+
+  .row
+    .col.s6
+      img.avatar(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnVl4EBvkXF3cYW7UfEmtoesj9OyaIwrpJWVAywU-Lg1XgInnr&s", alt= user.name)
+      p No avatar
+
+    .col.s6
+      p Your email: <strong>#{user.email}</strong>
+
+      form(action="/profile", method="POST")
+        .input-field
+          input#name.validate(type="text" name="name" value= user.name required)
+          label(for="name") Your name
+          span.helper-text(data-error='Enter name')
+
+        .file-field.input-field
+          .btn
+            span Avatar
+            input(type="file" name="avatar")
+          .file-path-wrapper
+            input.file-path.validate(type="text")
+
+        input(type="hidden", name="_csrf" value= csrf)
+
+        button.btn.btn-primary(type='submit') Update user

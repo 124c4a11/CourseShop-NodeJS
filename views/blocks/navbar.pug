@@ -38,6 +38,13 @@ nav.navbar.blue-grey
           li
             a(href="/orders") Orders
 
+        if isProfile
+          li.active
+            a(href="/profile") Profile
+        else
+          li
+            a(href="/profile") Profile
+
         li
           a(href="/auth/logout") Logout
       else
