@@ -4,15 +4,13 @@ const path = require('path');
 const csurf = require('csurf');
 const flash = require('connect-flash');
 
-
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
-
 
 const varsMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
 const pageNotFound = require('./middleware/error');
-
+const fileMiddleware = require('./middleware/file');
 
 const homeRoutes = require('./routes/home');
 const addRoutes = require('./routes/add');
@@ -37,6 +35,7 @@ const store = new MongoStore({
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: process.env.SECRET,
@@ -44,6 +43,7 @@ app.use(session({
   saveUninitialized: false,
   store
 }));
+app.use(fileMiddleware.single('avatar'));
 app.use(csurf());
 app.use(flash());
 app.use(varsMiddleware);

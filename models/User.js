@@ -14,6 +14,8 @@ const userSchema = new Schema ({
     required: true
   },
 
+  avatarUrl: String,
+
   resetToken: String,
 
   resetTokenExp: Date,

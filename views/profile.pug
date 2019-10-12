@@ -5,13 +5,15 @@ block content
 
   .row
     .col.s6
-      img.avatar(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnVl4EBvkXF3cYW7UfEmtoesj9OyaIwrpJWVAywU-Lg1XgInnr&s", alt= user.name)
-      p No avatar
+      if user.avatarUrl
+        img.avatar(src= user.avatarUrl, alt= user.name)
+      else
+        p No avatar
 
     .col.s6
       p Your email: <strong>#{user.email}</strong>
 
-      form(action="/profile", method="POST")
+      form(action="/profile", method="POST" enctype="multipart/form-data")
         .input-field
           input#name.validate(type="text" name="name" value= user.name required)
           label(for="name") Your name
