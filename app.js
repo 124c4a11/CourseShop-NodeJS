@@ -4,6 +4,7 @@ const path = require('path');
 const csurf = require('csurf');
 const flash = require('connect-flash');
 const helmet = require('helmet');
+const compression = require('compression');
 
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
@@ -48,6 +49,7 @@ app.use(fileMiddleware.single('avatar'));
 app.use(csurf());
 app.use(flash());
 app.use(helmet());
+app.use(compression());
 app.use(varsMiddleware);
 app.use(userMiddleware);
 
